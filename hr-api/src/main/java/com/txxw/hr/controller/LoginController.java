@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Api(tags = "LoginController")
 @RestController
-@RequestMapping("login")
+@RequestMapping("/login")
 public class LoginController {
 
     @Autowired
@@ -28,6 +28,5 @@ public class LoginController {
         //登录 验证用户  访问用户表，但是
         return loginService.login(loginParam,request);
     }
-
 
 }

@@ -125,6 +125,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 
+
 	//Jwt登录授权
 	@Bean
 	public JwtAuthencationTokenFilter jwtAuthencationTokenFilter(){
