@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.txxw.hr.vo.Result;
 import com.txxw.hr.vo.params.LoginParam;
 
+import java.util.List;
+
 /**
  * <p>
  *  Admin服务类实现层
@@ -24,5 +26,28 @@ public interface IAdminService extends IService<Admin> {
      * @param admin
      */
     void saveUser(Admin admin);
+
+    /**
+     * 获取所有操作员
+     * @param keywords
+     * @return
+     */
+    Result getAllAdmins(String keywords);
+
+    /**
+     * 更新操作员角色
+     * @param adminId
+     * @param rids
+     * @return
+     */
+    Result updateAdminRole(Long adminId, Long[] rids);
+
+    /**
+     * 更新用户密码
+     * @param oldPass
+     * @param pass
+     * @param adminId
+     * @return
+     */
 
 }

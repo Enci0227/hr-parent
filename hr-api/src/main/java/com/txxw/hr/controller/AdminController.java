@@ -2,17 +2,16 @@ package com.txxw.hr.controller;
 
 
 import com.txxw.hr.dao.pojo.Admin;
+import com.txxw.hr.dao.pojo.Role;
 import com.txxw.hr.service.IAdminService;
 import com.txxw.hr.service.IRoleService;
 import com.txxw.hr.vo.Result;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 /**
  * <p>
@@ -44,5 +43,42 @@ public class AdminController {
         admin.setRoles(roleService.getRolesByAdminId(admin.getId()));
         return Result.success(admin);
     }
+    @ApiOperation(value = "获取所有操作员")
+    @GetMapping("/")
+    public Result getAllAdmins(String keywords){
+        return adminService.getAllAdmins(keywords);
+    }
+
+    @ApiOperation(value = "更新操作员")
+    @PutMapping("/")
+    public Result updateAdmin(@RequestBody Admin admin){
+        if (adminService.updateById(admin)){
+            return Result.success("更新成功！");
+        }
+        return Result.fail(60002,"更新失败！");
+    }
+
+    @ApiOperation(value = "删除操作员")
+    @DeleteMapping("/{id}")
+    public Result deleteAdmin(@PathVariable Integer id){
+        if (adminService.removeById(id)){
+            return Result.success("删除成功！");
+        }
+        return Result.fail(60003,"删除失败！");
+    }
+
+    @ApiOperation(value = "获取所有角色")
+    @GetMapping("/role")
+    public List<Role> getAllRole(){
+        return roleService.list();
+    }
+
+    @ApiOperation(value = "更新操作员角色")
+    @PutMapping("/role")
+    public Result updateAdminRole(Long adminId,Long[] rids){
+        return adminService.updateAdminRole(adminId,rids);
+    }
+
+
 
 }

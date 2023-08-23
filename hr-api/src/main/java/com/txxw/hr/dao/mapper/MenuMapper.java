@@ -21,4 +21,6 @@ public interface MenuMapper extends BaseMapper<Menu> {
     List<Menu> getMenusByAdminId(Long id);
 
     List<Menu> getMenusWithRole();
+
+    List<Menu> getAllMenus();
 }

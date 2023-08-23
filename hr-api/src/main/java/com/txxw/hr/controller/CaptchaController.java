@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import javax.imageio.ImageIO;
@@ -19,13 +20,13 @@ import java.io.IOException;
  * @description:验证码控制器
  **/
 @RestController
-@RequestMapping("/captcha")
 @Api(tags = "验证码控制层")
 
 public class CaptchaController {
     @Autowired
     private DefaultKaptcha defaultKaptcha;
     @ApiOperation(value = "验证码")
+    @GetMapping(value = "/captcha",produces = "image/jpeg")
     public void captcha(HttpServletRequest request, HttpServletResponse
             response) {
         // 定义response输出类型为image/jpeg类型

@@ -6,6 +6,8 @@ import com.txxw.hr.dao.pojo.Menu;
 import com.txxw.hr.dao.mapper.MenuMapper;
 import com.txxw.hr.service.IMenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.txxw.hr.utils.AdminUtils;
+import com.txxw.hr.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -41,7 +43,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Override
     public List<Menu> getMenusByAdminId() {
         //获取用户id
-        Long adminId = ((Admin) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        Long adminId = AdminUtils.getCurrentAdmin().getId();
         ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
         //从Redis中获取菜单数据
         List<Menu> menus = (List<Menu>) valueOperations.get("menu_" + adminId);
@@ -56,5 +58,15 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Override
     public List<Menu> getMenusWithRole() {
         return menuMapper.getMenusWithRole();
+    }
+
+    /**
+     * 查询所有菜单（权限组）
+     * @return
+     */
+    @Override
+    public Result getAllMenus() {
+        List<Menu> allMenus = menuMapper.getAllMenus();
+        return Result.success(allMenus);
     }
 }

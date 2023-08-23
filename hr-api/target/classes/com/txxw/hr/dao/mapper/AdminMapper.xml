@@ -19,6 +19,14 @@
         <result column="notes" property="notes" />
     </resultMap>
 
+    <resultMap id="AdminWithRole" type="com.txxw.hr.dao.pojo.Admin" extends="BaseResultMap">
+        <collection property="roles" ofType="com.txxw.hr.dao.pojo.Role">
+            <id column="rid" property="id"/>
+            <result column="rname" property="name"/>
+            <result column="rnameZh" property="nameZh"/>
+        </collection>
+    </resultMap>
+
     <!--通用查询结果列 -->
     <sql id="Base_Column_List">
         id, username, name, admin, avatar, email, mobile_phone, password, salt, deleted, last_login, enabled, notes
@@ -27,5 +35,27 @@
     <select id="getMenusByAdminId" resultType="com.txxw.hr.dao.pojo.Menu">
 
     </select>
+
+    <!--  获取所有操作员   -->
+    <select id="getAllAdmins" resultMap="AdminWithRole">
+        SELECT
+        a.*,
+        r.id AS rid,
+        r.`name` AS rname,
+        r.nameZh AS rnameZh
+        FROM
+        tx_admin a
+        LEFT JOIN tx_admin_role ar ON a.id = ar.adminId
+        LEFT JOIN tx_role r ON r.id = ar.rid
+        WHERE
+        a.id != #{id}
+        <if test="null!=keywords and ''!=keywords">
+            AND a.`username` LIKE CONCAT( '%', #{keywords}, '%' )
+        </if>
+        ORDER BY
+        a.id
+    </select>
+
+
 
 </mapper>

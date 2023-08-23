@@ -2,6 +2,7 @@ package com.txxw.hr.service;
 
 import com.txxw.hr.dao.pojo.Menu;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.txxw.hr.vo.Result;
 
 import java.util.List;
 
@@ -22,4 +23,10 @@ public interface IMenuService extends IService<Menu> {
      * @return
      */
     List<Menu> getMenusWithRole();
+
+    /**
+     * 查询所有菜单
+     * @return
+     */
+    Result getAllMenus();
 }
