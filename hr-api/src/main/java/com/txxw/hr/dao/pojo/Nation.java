@@ -4,11 +4,7 @@ import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -19,15 +15,17 @@ import lombok.*;
  * </p>
  *
  * @author Enci
- * @since 2023-08-21
+ * @since 2023-08-23
  */
 @Data
+//无参构造
 @NoArgsConstructor
+//有参构造
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = false,of = "name")
-@TableName("tx_position")
-@ApiModel(value="Position对象", description="")
-public class Position implements Serializable {
+@TableName("tx_nation")
+@ApiModel(value="Nation对象", description="")
+public class Nation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,18 +33,10 @@ public class Position implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "职位")
-    @Excel(name = "职位")
-    @NonNull
+    @ApiModelProperty(value = "民族")
+    @Excel(name = "民族")
+    @NonNull//必填
     private String name;
-
-    @ApiModelProperty(value = "创建时间")
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
-    @TableField("createDate")
-    private LocalDateTime createDate;
-
-    @ApiModelProperty(value = "是否启用")
-    private Boolean enabled;
 
 
 }
