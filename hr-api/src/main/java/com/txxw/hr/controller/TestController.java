@@ -76,4 +76,10 @@ public class TestController {
         return "/employee/advanced/hello";
     }
 
+    @ApiOperation("测试remote")
+    @GetMapping(value = "/remote")
+    public Result remote(){
+        return Result.success("8083远程请求发送成功");
+    }
+
 }
