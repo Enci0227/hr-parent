@@ -9,6 +9,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.txxw.hr.config.CustomAuthorityDeserializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
@@ -82,6 +84,7 @@ public class Admin implements Serializable, UserDetails {
     private List<Role> roles;
 
     @Override
+    @JsonDeserialize(using = CustomAuthorityDeserializer.class)//反序列化
     public Collection<? extends GrantedAuthority> getAuthorities() {
 //        角色列表对应的名称转成SimpleGrantedAuthority格式（权限）存入列表
         List<SimpleGrantedAuthority> authorities = roles.stream()

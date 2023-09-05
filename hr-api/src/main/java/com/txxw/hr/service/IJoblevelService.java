@@ -2,6 +2,8 @@ package com.txxw.hr.service;
 
 import com.txxw.hr.dao.pojo.Joblevel;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.txxw.hr.dao.pojo.Jobseeker;
+import com.txxw.hr.vo.Result;
 
 /**
  * <p>

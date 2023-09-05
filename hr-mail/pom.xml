@@ -33,6 +33,14 @@
             <artifactId>hr-api</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
+
+        <!--FastDFS依赖-->
+        <dependency>
+            <groupId>org.csource</groupId>
+            <artifactId>fastdfs-client-java</artifactId>
+            <version>1.30-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
 </project>

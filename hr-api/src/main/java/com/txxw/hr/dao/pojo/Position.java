@@ -36,6 +36,7 @@ public class Position implements Serializable {
     private Long id;
 
     @ApiModelProperty(value = "职位")
+    @TableField("`name`")
     @Excel(name = "职位")
     @NonNull
     private String name;

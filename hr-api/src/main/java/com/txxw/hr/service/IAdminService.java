@@ -4,6 +4,7 @@ import com.txxw.hr.dao.pojo.Admin;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.txxw.hr.vo.Result;
 import com.txxw.hr.vo.params.LoginParam;
+import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
@@ -49,5 +50,15 @@ public interface IAdminService extends IService<Admin> {
      * @param adminId
      * @return
      */
+    Result updateAdminPassword(String oldPass, String pass, Integer adminId);
+
+    /**
+     * 更新用户头像
+     * @param url
+     * @param id
+     * @param authentication
+     * @return
+     */
+    Result updateAdminUserFace(String url, Long id, Authentication authentication);
 
 }

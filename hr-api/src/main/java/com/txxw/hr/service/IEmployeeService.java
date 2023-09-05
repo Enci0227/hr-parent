@@ -3,6 +3,7 @@ package com.txxw.hr.service;
 import com.txxw.hr.dao.pojo.Employee;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.txxw.hr.vo.Result;
+import com.txxw.hr.vo.ResultPage;
 import com.txxw.hr.vo.params.EmployeeParams;
 
 import java.util.List;
@@ -34,4 +35,6 @@ public interface IEmployeeService extends IService<Employee> {
      * @return
      */
     List<Employee> getEmployee(Long id);
+
+    ResultPage getEmployeeWithSalary(Integer currentPage, Integer size);
 }
