@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.txxw.hr.dao.mapper.JobseekerMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.txxw.hr.dao.pojo.Jobseeker">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="gender" property="gender" />
+        <result column="age" property="age" />
+        <result column="nationId" property="nationId" />
+        <result column="tiptopDegree" property="tiptopDegree" />
+        <result column="posId" property="posId" />
+        <result column="type" property="type" />
+        <result column="source" property="source" />
+        <result column="experience" property="experience" />
+        <result column="expectSalary" property="expectSalary" />
+        <result column="mail" property="mail" />
+        <result column="phone" property="phone" />
+        <result column="status" property="status" />
+        <result column="isBlock" property="isBlock" />
+        <result column="sendTime" property="sendTime" />
+        <result column="resume" property="resume" />
+        <result column="portfolio" property="portfolio" />
+        <result column="notes" property="notes" />
+        <result column="submit" property="submit" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, gender, age, nationId, tiptopDegree, posId, type, source, experience, expectSalary, mail, phone, status, isBlock, sendTime, resume, portfolio, notes, submit
+    </sql>
+    <select id="listJobseeker" resultType="com.txxw.hr.dao.pojo.Jobseeker">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM
+        tx_jobseeker
+        <where>
+            1 = 1
+            <if test="gender != ''">
+                and gender=#{gender}
+            </if>
+            <if test="posId != ''">
+                and posId=#{posId}
+            </if>
+            <if test="tiptopDegree != ''">
+                and tiptopDegree=#{tiptopDegree}
+            </if>
+            <if test="source != ''">
+                and source=#{source}
+            </if>
+            <if test="type != ''">
+                and type=#{type}
+            </if>
+
+        </where>
+        order by sendTime asc
+    </select>
+
+</mapper>
