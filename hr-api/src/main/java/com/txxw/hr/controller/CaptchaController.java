@@ -20,7 +20,7 @@ import java.io.IOException;
  * @description:验证码控制器
  **/
 @RestController
-@Api(tags = "验证码控制层")
+@Api(tags = "验证码Controller")
 
 public class CaptchaController {
     @Autowired

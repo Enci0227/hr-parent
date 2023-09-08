@@ -63,7 +63,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				"/swagger-resources/**",
 				"/v2/api-docs/**",
 				"/captcha/**",
-				"/ws/**"//websocket放行
+				"/ws/**",//websocket放行
+				"/file/**",
+				"/txsw/testpaper/**",//放行天巡十问问卷获取表单
+				"/txsw/answer/**"//放行天巡十问问卷提交表单
 		);
 	}
 

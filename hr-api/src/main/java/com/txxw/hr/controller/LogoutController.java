@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(tags = "LogoutController")
+@Api(tags = "登出Controller")
 @RestController
 @RequestMapping("logout")
 public class LogoutController {
@@ -20,7 +20,7 @@ public class LogoutController {
     private LoginService loginService;
 
     @ApiOperation(value = "退出登录")
-    @PostMapping("/logout")
+    @PostMapping
     public Result logout(){
         return loginService.logout();
     }

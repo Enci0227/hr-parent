@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Api(tags = "LoginController")
+@Api(tags = "登录Controller")
 @RestController
 @RequestMapping("/login")
 public class LoginController {

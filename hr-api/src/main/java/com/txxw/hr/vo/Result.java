@@ -1,5 +1,7 @@
 package com.txxw.hr.vo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -10,14 +12,19 @@ import lombok.Data;
  **/
 @Data
 @AllArgsConstructor
+@ApiModel(value="Result对象", description="返回给前端数据的固定格式")
 public class Result {
 
+    @ApiModelProperty(value = "是否成功")
     private boolean success;
 
+    @ApiModelProperty(value = "状态码")
     private int code;
 
+    @ApiModelProperty(value = "提示信息")
     private String msg;
 
+    @ApiModelProperty(value = "返回数据")
     private Object data;
 
 

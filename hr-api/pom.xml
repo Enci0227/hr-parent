@@ -193,5 +193,12 @@
             <scope>compile</scope>
         </dependency>
 
+<!--        文件上传依赖包-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.5</version>
+        </dependency>
+
     </dependencies>
 </project>

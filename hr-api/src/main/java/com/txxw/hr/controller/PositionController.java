@@ -4,6 +4,7 @@ package com.txxw.hr.controller;
 import com.txxw.hr.dao.pojo.Position;
 import com.txxw.hr.service.IPositionService;
 import com.txxw.hr.vo.Result;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import java.util.List;
  * @author Enci
  * @since 2023-08-21
  */
+@Api(tags = "职位管理Controller")
 @RestController
 @RequestMapping("/system/basic/pos")
 public class PositionController {

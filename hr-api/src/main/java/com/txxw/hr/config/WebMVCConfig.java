@@ -18,6 +18,6 @@ public class WebMVCConfig implements WebMvcConfigurer {
         //跨域配置，不可设置为*，不安全, 前后端分离项目，可能域名不一致
         //本地测试 端口不一致 也算跨域
         //设置每一个接口可以被访问的域名
-        registry.addMapping("/**").allowedOrigins("https://tianxunxingwang.com","http://localhost:8080","http://localhost:8083");
+        registry.addMapping("/**").allowedOrigins("https://tianxunxingwang.com","http://localhost:8080","http://localhost:8083","http://10.0.100.47:5173");
     }
 }
