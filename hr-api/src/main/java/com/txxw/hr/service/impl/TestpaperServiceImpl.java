@@ -2,10 +2,7 @@ package com.txxw.hr.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.txxw.hr.dao.mapper.*;
-import com.txxw.hr.dao.pojo.Annex;
-import com.txxw.hr.dao.pojo.Infokey;
-import com.txxw.hr.dao.pojo.Question;
-import com.txxw.hr.dao.pojo.Testpaper;
+import com.txxw.hr.dao.pojo.*;
 import com.txxw.hr.service.ITestpaperService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.txxw.hr.vo.QuestionVo;
@@ -25,7 +22,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author Enci
@@ -42,6 +39,11 @@ public class TestpaperServiceImpl extends ServiceImpl<TestpaperMapper, Testpaper
     private QuestionMapper questionMapper;
     @Autowired
     private AnnexMapper annexMapper;
+    @Autowired
+    private NationMapper nationMapper;
+    @Autowired
+    private PositionMapper positionMapper;
+
 
     @Override
     public Result getTestpaper(Long id) {
@@ -59,12 +61,48 @@ public class TestpaperServiceImpl extends ServiceImpl<TestpaperMapper, Testpaper
             infokeyIdList.add(Long.parseLong(infokeyId));
         }
         LambdaQueryWrapper<Infokey> infokeyWrapper = new LambdaQueryWrapper<>();
-        infokeyWrapper.in(Infokey::getId,infokeyIdList);
+        infokeyWrapper.in(Infokey::getId, infokeyIdList);
         List<Infokey> infokeyList = infokeyMapper.selectList(infokeyWrapper);
+
+//        List<Infokey> infokeyListVo = new ArrayList<>();
+
+
+        for (Infokey infokey : infokeyList) {
+
+            //处理民族选择器
+            if (infokey.getKeyname().equals("nationId")) {
+//                查出所有民族，然后用/分隔将其塞入isSelect
+                LambdaQueryWrapper<Nation> nationWrapper = new LambdaQueryWrapper<>();
+                nationWrapper.select(Nation::getName);
+                List<Nation> nations = nationMapper.selectList(nationWrapper);
+                List<String> nationStrings = new ArrayList<>();
+                for (Nation nation : nations) {
+                    nationStrings.add(nation.getName());
+                }
+                String nationSelect = String.join("/", nationStrings);
+                infokey.setIsSelect(nationSelect);
+                continue;
+            }else if (infokey.getKeyname().equals("posId") ){
+                LambdaQueryWrapper<Position> posWrapper = new LambdaQueryWrapper<>();
+                posWrapper.select(Position::getName);
+                List<Position> positions= positionMapper.selectList(posWrapper);
+                List<String> posStrings = new ArrayList<>();
+                for (Position position : positions) {
+                    posStrings.add(position.getName());
+                }
+                String posSelect = String.join("/", posStrings);
+                infokey.setIsSelect(posSelect);
+                System.out.println(infokey);
+                continue;
+            }else{
+                continue;
+            }
+
+        }
 
         //获取问题列表
         LambdaQueryWrapper<Question> questionWrapper = new LambdaQueryWrapper<>();
-        questionWrapper.eq(Question::getType,id);
+        questionWrapper.eq(Question::getType, id);
         List<Question> questionList = questionMapper.selectList(questionWrapper);
         List<QuestionVo> questionVoList = copyList(questionList);
 
@@ -93,7 +131,7 @@ public class TestpaperServiceImpl extends ServiceImpl<TestpaperMapper, Testpaper
          * 1.修改数据库中已经存在的基本信息字段集合
          */
         LambdaQueryWrapper<Infokey> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Infokey::getId,infokeyParam.getTestpaperId());
+        wrapper.eq(Infokey::getId, infokeyParam.getTestpaperId());
         Testpaper testpaper = new Testpaper();
         testpaper.setId(infokeyParam.getTestpaperId());
 
@@ -114,10 +152,10 @@ public class TestpaperServiceImpl extends ServiceImpl<TestpaperMapper, Testpaper
         return questionVoList;
     }
 
-    private QuestionVo copy(Question question){
+    private QuestionVo copy(Question question) {
         QuestionVo questionVo = new QuestionVo();
         questionVo.setId(String.valueOf(question.getId()));
-        BeanUtils.copyProperties(question,questionVo);
+        BeanUtils.copyProperties(question, questionVo);
         questionVo.setCreateDate(new DateTime(question.getCreateDate()).toString("yyyy-MM-dd HH:mm"));
         return questionVo;
     }

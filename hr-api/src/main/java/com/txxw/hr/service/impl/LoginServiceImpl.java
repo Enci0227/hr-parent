@@ -52,11 +52,13 @@ public class LoginServiceImpl implements LoginService {
      */
     @Override
     public Result login(LoginParam adminLoginParam, HttpServletRequest request) {
-        String code = adminLoginParam.getCode();
-        String captcha = (String) request.getSession().getAttribute("captcha");
-        if (StringUtils.isBlank(code) || !captcha.equals(code)) {
-            return Result.fail(CAPTCHA_ERROR.getCode(),CAPTCHA_ERROR.getMsg());
-        }
+//        String code = adminLoginParam.getCode();
+//        System.out.println("第2个sessionId"+request.getSession().getId());
+//        String captcha = (String) request.getSession().getAttribute("captcha");
+////        System.out.println(captcha);
+//        if (StringUtils.isBlank(code) || !captcha.equals(code)) {
+//            return Result.fail(CAPTCHA_ERROR.getCode(),CAPTCHA_ERROR.getMsg());
+//        }
         //登录
         UserDetails userDetails = userDetailsService.loadUserByUsername(adminLoginParam.getUsername());
         //获取不到用户信息或密码不匹配

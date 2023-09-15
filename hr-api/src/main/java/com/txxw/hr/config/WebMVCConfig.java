@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @createDate:2023/8/10
  * @description:配置前后端跨域访问
  **/
+//跨域配置
 @Configuration
 public class WebMVCConfig implements WebMvcConfigurer {
 
@@ -18,6 +19,12 @@ public class WebMVCConfig implements WebMvcConfigurer {
         //跨域配置，不可设置为*，不安全, 前后端分离项目，可能域名不一致
         //本地测试 端口不一致 也算跨域
         //设置每一个接口可以被访问的域名
-        registry.addMapping("/**").allowedOrigins("https://tianxunxingwang.com","http://localhost:8080","http://localhost:8083","http://10.0.100.47:5173");
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:8080","http://localhost:8083","http://10.0.100.47:5173","http://10.0.1.6:5173")//这里标识了所有接口可以被访问的域
+                .allowedHeaders("*")
+                .allowedMethods("*")
+                .allowCredentials(true);
     }
+
+
 }

@@ -48,7 +48,9 @@ public class JobseekerVo {
 
     private Integer status;
 
-    private Boolean isBlock;
+    private Boolean isBlack;
+
+    private String blackreason;
 
     private String sendTime;
 

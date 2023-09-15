@@ -1,24 +1,16 @@
 package com.txxw.hr.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.txxw.hr.dao.mapper.AnnexurlMapper;
-import com.txxw.hr.dao.mapper.JobseekerMapper;
-import com.txxw.hr.dao.mapper.QuestionMapper;
+import com.txxw.hr.dao.mapper.*;
 import com.txxw.hr.dao.pojo.Annexurl;
 import com.txxw.hr.dao.pojo.Answer;
-import com.txxw.hr.dao.mapper.AnswerMapper;
+import com.txxw.hr.dao.pojo.Deliver;
 import com.txxw.hr.dao.pojo.Jobseeker;
 import com.txxw.hr.service.IAnswerService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.txxw.hr.service.IJobseekerService;
-import com.txxw.hr.vo.AnswerVo;
-import com.txxw.hr.vo.JobseekerVo;
-import com.txxw.hr.vo.Result;
-import com.txxw.hr.vo.TestpaperBodyVo;
-import com.txxw.hr.vo.params.AnnexurlParam;
-import com.txxw.hr.vo.params.AnswerParam;
-import com.txxw.hr.vo.params.JobSeekerPageParam;
-import com.txxw.hr.vo.params.TxswAnswerParam;
+import com.txxw.hr.vo.*;
+import com.txxw.hr.vo.params.*;
 import org.joda.time.DateTime;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +18,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +45,7 @@ public class AnswerServiceImpl extends ServiceImpl<AnswerMapper, Answer> impleme
     @Autowired
     private AnnexurlMapper annexurlMapper;
 
+
     @Transactional
     @Override
     public Result submitTxswAnswer(TxswAnswerParam txswAnswerParam) {
@@ -67,7 +61,11 @@ public class AnswerServiceImpl extends ServiceImpl<AnswerMapper, Answer> impleme
             Answer answer = new Answer();
             BeanUtils.copyProperties(answerParam, answer);
             answer.setJobseekerId(jobSeekerId);
-            answerMapper.insert(answer);
+            try{
+                answerMapper.insert(answer);
+            }catch (Exception e){
+                return Result.fail(60011,"十问回答传参异常！");
+            }
         }
 
         //插入求职者作品集数据
@@ -75,7 +73,11 @@ public class AnswerServiceImpl extends ServiceImpl<AnswerMapper, Answer> impleme
         Annexurl annexurl = new Annexurl();
         BeanUtils.copyProperties(annexurlParam,annexurl);
         annexurl.setJobseekerId(jobSeekerId);
-
+        try{
+            annexurlMapper.insert(annexurl);
+        }catch (Exception e){
+            return Result.fail(60012,"简历/作品集传参异常！");
+        }
         return Result.success("天巡十问提交成功！");
     }
 
@@ -102,6 +104,8 @@ public class AnswerServiceImpl extends ServiceImpl<AnswerMapper, Answer> impleme
         testpaperBodyVo.setAnnexurl(getAnnexByJobSeekerId(jobseekerId));
         return Result.success(testpaperBodyVo);
     }
+
+
 
     private List<AnswerVo> copyList(List<Answer> answers) {
         ArrayList<AnswerVo> answerVoList = new ArrayList<>();

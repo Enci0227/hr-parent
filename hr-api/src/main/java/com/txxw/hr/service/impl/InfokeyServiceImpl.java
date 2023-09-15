@@ -34,4 +34,10 @@ public class InfokeyServiceImpl extends ServiceImpl<InfokeyMapper, Infokey> impl
         return Result.success(infokeys);
     }
 
+    @Override
+    public Result addInfokey(Infokey infokey) {
+        infokeyMapper.insert(infokey);
+        return Result.success("添加新字段成功！");
+    }
+
 }

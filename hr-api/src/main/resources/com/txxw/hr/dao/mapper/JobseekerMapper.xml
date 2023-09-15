@@ -18,7 +18,8 @@
         <result column="mail" property="mail" />
         <result column="phone" property="phone" />
         <result column="status" property="status" />
-        <result column="isBlock" property="isBlock" />
+        <result column="isBlack" property="isBlack" />
+        <result column="blackreason" property="blackreason" />
         <result column="sendTime" property="sendTime" />
         <result column="resume" property="resume" />
         <result column="portfolio" property="portfolio" />
@@ -28,7 +29,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, gender, age, nationId, tiptopDegree, posId, type, source, experience, expectSalary, mail, phone, status, isBlock, sendTime, resume, portfolio, notes, submit
+        id, name, gender, age, nationId, tiptopDegree, posId, type, source, experience, expectSalary, mail, phone, status, isBlack, blackreason, sendTime, resume, portfolio, notes, submit
     </sql>
     <select id="listJobseeker" resultType="com.txxw.hr.dao.pojo.Jobseeker">
         SELECT
@@ -37,6 +38,9 @@
         tx_jobseeker
         <where>
             1 = 1
+            <if test="name != ''">
+                and `name` like concat('%',#{name},'%')
+            </if>
             <if test="gender != ''">
                 and gender=#{gender}
             </if>
@@ -47,10 +51,29 @@
                 and tiptopDegree=#{tiptopDegree}
             </if>
             <if test="source != ''">
-                and source=#{source}
+                and `source`=#{source}
             </if>
             <if test="type != ''">
-                and type=#{type}
+                and `type`=#{type}
+            </if>
+            <if test="isBlack != null">
+                and isBlack=#{isBlack}
+            </if>
+            <if test="age != null and age.length > 0">
+                <if test="age[0] != null and age[1] != null">
+                    AND age between #{age[0]} and #{age[1]}
+                </if>
+            </if>
+            <if test="specificAge != null">
+                    AND age = #{specificAge}
+            </if>
+            <if test="expectSalary != null and expectSalary.length > 0">
+                <if test="expectSalary[0] != null and expectSalary[1] != null">
+                    AND expectSalary between #{expectSalary[0]} and #{expectSalary[1]}
+                </if>
+            </if>
+            <if test="phone != null">
+                AND phone like concat('%',#{phone},'%')
             </if>
 
         </where>

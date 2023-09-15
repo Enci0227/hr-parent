@@ -24,4 +24,9 @@ public interface IInfokeyService extends IService<Infokey> {
     Result findAll();
 
 
+    /**
+     * 添加新的枚举字段
+     * @return
+     */
+    Result addInfokey(Infokey infokey);
 }

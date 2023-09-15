@@ -30,7 +30,7 @@ public class PositionController {
     private IPositionService positionService;
 
     @ApiOperation(value = "获取所有职位信息")
-    @GetMapping("/")
+    @GetMapping("/list")
     public Result getAllPositions() {
         List<Position> list = positionService.list();
         return Result.success(list);

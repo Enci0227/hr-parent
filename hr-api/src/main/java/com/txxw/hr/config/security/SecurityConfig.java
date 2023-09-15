@@ -66,7 +66,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				"/ws/**",//websocket放行
 				"/file/**",
 				"/txsw/testpaper/**",//放行天巡十问问卷获取表单
-				"/txsw/answer/**"//放行天巡十问问卷提交表单
+				"/txsw/answer/**",//放行天巡十问问卷提交表单
+				"/nation/**",//放行民族选择器
+				"/system/basic/pos/list",//放行职位选择器
+				"/txsw/**",
+				"/jobseeker/**"//临时放行求职者操作全部内容
 		);
 	}
 

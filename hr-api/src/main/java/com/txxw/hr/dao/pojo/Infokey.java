@@ -29,19 +29,19 @@ public class Infokey implements Serializable {
     @ApiModelProperty(value = "基本信息字段id")
     private Long id;
 
-    @ApiModelProperty(value = "基本信息字段名称")
+    @ApiModelProperty(value = "基本信息字段名称",required = true)
     private String name;
 
-    @ApiModelProperty(value = "基本信息输入值的类型")
+    @ApiModelProperty(value = "基本信息输入值的类型",required = true)
     private Integer type;
 
     @ApiModelProperty(value = "给求职者的提示信息")
     private String info;
 
-    @ApiModelProperty(value = "对应基本信息表中的字段")
+    @ApiModelProperty(value = "对应基本信息表中的字段",required = true)
     private String keyname;
 
-    @ApiModelProperty(value = "是否必填，0非必填1必填")
+    @ApiModelProperty(value = "是否必填，0非必填1必填",required = true)
     private Boolean required;
 
     @ApiModelProperty(value = "如果是选择性字段请输入选择信息，使用/分隔")

@@ -24,7 +24,7 @@ public class Jobseeker implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "求职者id")
+    @ApiModelProperty(value = "求职者id",example = "1")
     private Long id;
 
     @ApiModelProperty(value = "姓名")
@@ -71,8 +71,12 @@ public class Jobseeker implements Serializable {
     private Integer status;
 
     @ApiModelProperty(value = "是否拉黑")
-    @TableField("isBlock")
-    private Boolean isBlock;
+    @TableField("isBlack")
+    private Boolean isBlack;
+
+    @ApiModelProperty(value = "拉黑原因")
+    @TableField("blackreason")
+    private String blackreason;
 
     @ApiModelProperty(value = "投递时间")
     @TableField("sendTime")

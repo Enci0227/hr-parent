@@ -27,5 +27,5 @@ public interface JobseekerMapper extends BaseMapper<Jobseeker> {
      * @param type
      * @return
      */
-    IPage<Jobseeker> listJobseeker(Page<Jobseeker> page, String gender, Long posId, String tiptopDegree, String source, String type);
+    IPage<Jobseeker> listJobseeker(Page<Jobseeker> page, String name, Integer[] age, String gender, Long posId, Integer[] expectSalary, String tiptopDegree, String source, String type, Boolean isBlack, Integer specificAge, String phone);
 }

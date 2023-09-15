@@ -7,11 +7,12 @@
         <id column="id" property="id" />
         <result column="name" property="name" />
         <result column="required" property="required" />
+        <result column="keyname" property="keyname" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, required
+        id, name, required, keyname
     </sql>
 
 </mapper>

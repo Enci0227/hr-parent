@@ -32,5 +32,8 @@ public class Annex implements Serializable {
     @ApiModelProperty(value = "是否允许添加")
     private Boolean required;
 
+    @ApiModelProperty(value = "字段名称")
+    private String keyname;
+
 
 }

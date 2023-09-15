@@ -31,4 +31,10 @@ public class InfokeyController {
         return infokeyService.findAll();
     }
 
+    @ApiOperation(value = "添加枚举基本信息字段（暂不用于前端访问）",notes = "该接口暂时不用于前端访问，仅供后端数据库操作处理")
+    @GetMapping("add")
+    public Result addInfokey(@RequestBody Infokey infokey){
+        return infokeyService.addInfokey(infokey);
+    }
+
 }

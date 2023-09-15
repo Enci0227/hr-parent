@@ -30,14 +30,14 @@ public class JobseekerParam{
     @ApiModelProperty(value = "年龄")
     private Integer age;
 
-    @ApiModelProperty(value = "民族id",required = true)
-    private Long nationId;
+    @ApiModelProperty(value = "民族名称",required = true)
+    private String nation;
 
     @ApiModelProperty(value = "最高学历",required = true)
     private String tiptopDegree;
 
-    @ApiModelProperty(value = "职位id",required = true)
-    private Long posId;
+    @ApiModelProperty(value = "职位名称",required = true)
+    private String position;
 
     @ApiModelProperty(value = "应聘类型",required = true)
     private String type;
