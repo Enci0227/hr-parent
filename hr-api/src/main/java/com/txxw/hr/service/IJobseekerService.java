@@ -9,6 +9,9 @@ import com.txxw.hr.vo.params.JobSeekerPageParam;
 import com.txxw.hr.vo.params.JobseekerParam;
 import com.txxw.hr.vo.params.UserStatusParam;
 
+import java.time.LocalDate;
+import java.util.Map;
+
 /**
  * <p>
  *  服务类
@@ -24,7 +27,7 @@ public interface IJobseekerService extends IService<Jobseeker> {
      * @param jobseekerParam
      * @return
      */
-    Long addJobSeeker(JobseekerParam jobseekerParam);
+    Map<String, String> addJobSeeker(JobseekerParam jobseekerParam);
 
     /**
      * 条件筛选求职者
@@ -60,4 +63,39 @@ public interface IJobseekerService extends IService<Jobseeker> {
      * @return
      */
     Result updateStatusByJobseekerId(UserStatusParam userStatusParam);
+
+    /**
+     * 条件查询求职者基本信息及面试信息
+     * @param jobSeekerPageParam
+     * @return
+     */
+    Result listAllJobSeeker(JobSeekerPageParam jobSeekerPageParam);
+
+    /**
+     * 操作员添加求职者信息
+     * @param jobseekerParam
+     * @return
+     */
+    Result addJobSeekerByOperator(JobseekerParam jobseekerParam);
+
+    /**
+     * 根据邮箱或电话即时响应求职者信息
+     * @param jobseekerParam
+     * @return
+     */
+    Result responseByMailAndPhone(JobseekerParam jobseekerParam);
+
+    /**
+     * 查询从某个日期开始收到的有效简历数量及通过数
+     * @param date
+     * @return
+     */
+    Result getResumeCountByTime(LocalDate date);
+
+    /**
+     * 更新求职者基本信息
+     * @param jobseekerParam
+     * @return
+     */
+    Result updateJobseekerBaseinfo(JobseekerParam jobseekerParam);
 }

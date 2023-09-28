@@ -91,7 +91,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
      * @return
      */
     @Override
-    public Result updateAdminPassword(String oldPass, String pass, Integer adminId) {
+    public Result updateAdminPassword(String oldPass, String pass, Long adminId) {
         Admin admin = adminMapper.selectById(adminId);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         //判断旧密码是否正确
@@ -99,10 +99,12 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
             admin.setPassword(encoder.encode(pass));
             int result = adminMapper.updateById(admin);
             if (1==result){
-                return Result.success("更新成功！");
+                return Result.success("修改用户密码成功！");
             }
+        }else{
+            return Result.fail(60002,"旧密码不匹配，修改用户密码失败！");
         }
-        return Result.fail(60002,"更新失败！");
+        return Result.fail(60002,"修改用户密码失败！");
     }
 
     /**

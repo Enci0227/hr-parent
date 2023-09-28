@@ -59,4 +59,11 @@ public class JobSeekerPageParam {
 
     @ApiModelProperty(value = "手机号",notes = "支持模糊查询")
     private String phone;
+
+    @ApiModelProperty(value = "面试安排选项",notes = "选择一面则查询一面通过的")
+    private Integer interviewSelect;
+
+    @ApiModelProperty(value = "状态",notes = "0不通过1通过2待定")
+    private Integer status;
+
 }

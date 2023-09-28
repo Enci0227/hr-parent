@@ -50,7 +50,7 @@ public interface IAdminService extends IService<Admin> {
      * @param adminId
      * @return
      */
-    Result updateAdminPassword(String oldPass, String pass, Integer adminId);
+    Result updateAdminPassword(String oldPass, String pass, Long adminId);
 
     /**
      * 更新用户头像

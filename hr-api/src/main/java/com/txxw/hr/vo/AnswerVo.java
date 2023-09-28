@@ -26,6 +26,9 @@ public class AnswerVo {
     @ApiModelProperty(value = "问题内容")
     private String question;
 
+    @ApiModelProperty(value = "回答编号Id")
+    private String answerId;
+
     @ApiModelProperty(value = "问题回答")
     private String answer;
 

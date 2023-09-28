@@ -11,9 +11,9 @@ spring:
     # 编码格式
     default-encoding: utf-8
     # 授权码（在邮箱开通服务时获取）
-    password: ALTFQAUQCLDMYQLQ
+    password: example
     # 发送者邮箱地址
-    username: 17550316321@163.com
+    username: example@163.com
     # 端口（不同邮箱端口号不同）
     port: 25
     # rabbitmq配置

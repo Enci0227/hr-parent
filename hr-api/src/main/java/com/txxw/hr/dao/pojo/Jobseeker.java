@@ -1,8 +1,12 @@
 package com.txxw.hr.dao.pojo;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -82,17 +86,45 @@ public class Jobseeker implements Serializable {
     @TableField("sendTime")
     private Long sendTime;
 
-    @ApiModelProperty(value = "简历链接url")
-    private String resume;
-
-    @ApiModelProperty(value = "作品集链接url,可存储多个链接")
-    private String portfolio;
-
     @ApiModelProperty(value = "备注")
     private String notes;
 
     @ApiModelProperty(value = "提交状态：0未提交，1已提交")
     private Boolean submit;
 
+    @ApiModelProperty(value = "出生日期")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/shanghai")
+    private LocalDate birthday;
+
+    @ApiModelProperty(value = "籍贯")
+    @TableField("nativePlace")
+    private String nativePlace;
+
+    @ApiModelProperty(value = "政治面貌")
+    @TableField("politicId")
+    private Long politicId;
+
+    @ApiModelProperty(value = "最高学历院校")
+    private String school;
+
+    @ApiModelProperty(value = "所属专业/方向")
+    private String specialty;
+
+    @ApiModelProperty(value = "毕业年份")
+    @TableField("graduateYear")
+    private String graduateYear;
+
+    @ApiModelProperty(value = "可到岗时间")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/shanghai")
+    @TableField("postTime")
+    private LocalDate postTime;
+
+    @ApiModelProperty(value = "操作员")
+    private String operator ;
+
+    //查询出求职者的相关面试信息
+    @ApiModelProperty(value = "面试信息")
+    @TableField(exist = false)
+    private Interview interview;
 
 }

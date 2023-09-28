@@ -33,7 +33,8 @@ public class MailTask {
      * 邮件发送定时任务
      * 10秒执行一次
      */
-    @Scheduled(cron = "0/10 * * * * ?")
+//    @Scheduled(cron = "0/10 * * * * ?")
+    @Scheduled(cron = "0 0 10 * * ?")//每天十点执行一次
     public void mailTask(){
         List<MailLog> list = mailLogService.list(new QueryWrapper<MailLog>()
                 .eq("status", 0)

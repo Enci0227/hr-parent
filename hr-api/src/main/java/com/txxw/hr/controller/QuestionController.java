@@ -30,10 +30,10 @@ public class QuestionController {
     @Autowired
     private IQuestionService questionService;
 
-    @ApiOperation(value = "更新或添加问题内容")
+    @ApiOperation(value = "更新/添加问题内容（不填id就是新建问题）")
     @PostMapping("update")
     public Result updateQuestionForm(@RequestBody @ApiParam(value = "用户更新或添加的问题参数", required = true) QuestionParam questionParam){
-        return questionService.updateQuestionForm(questionParam);
+        return questionService.updateQuestion(questionParam);
     }
 
     @ApiOperation(value = "删除问题")

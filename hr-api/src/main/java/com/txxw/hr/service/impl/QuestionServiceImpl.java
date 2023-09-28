@@ -33,7 +33,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
     private QuestionMapper questionMapper;
 
     @Override
-    public Result updateQuestionForm(QuestionParam questionParam) {
+    public Result updateQuestion(QuestionParam questionParam) {
         /**
          * 如果有id,则在原有基础上修改
          * 如果没有id，则添加新数据

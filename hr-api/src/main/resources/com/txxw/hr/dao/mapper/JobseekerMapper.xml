@@ -21,15 +21,48 @@
         <result column="isBlack" property="isBlack" />
         <result column="blackreason" property="blackreason" />
         <result column="sendTime" property="sendTime" />
-        <result column="resume" property="resume" />
-        <result column="portfolio" property="portfolio" />
         <result column="notes" property="notes" />
         <result column="submit" property="submit" />
+        <result column="birthday" property="birthday"/>
+        <result column="nativePlace" property="nativePlace"/>
+        <result column="politicId" property="politicId"/>
+        <result column="school" property="school"/>
+        <result column="specialty" property="specialty"/>
+        <result column="graduateYear" property="graduateYear"/>
+        <result column="postTime" property="postTime"/>
+        <result column="operator" property="operator"/>
+    </resultMap>
+
+    <resultMap id="JobseekerWithInterview" type="com.txxw.hr.dao.pojo.Jobseeker" extends="BaseResultMap">
+        <collection property="interview" ofType="com.txxw.hr.dao.pojo.Interview">
+            <result column="first_time" property="firstTime" />
+            <result column="second_time" property="secondTime" />
+            <result column="third_time" property="thirdTime" />
+            <result column="first_interviewer" property="firstInterviewer" />
+            <result column="second_interviewer" property="secondInterviewer" />
+            <result column="third_interviewer" property="thirdInterviewer" />
+            <result column="first_evaluate" property="firstEvaluate" />
+            <result column="second_evaluate" property="secondEvaluate" />
+            <result column="third_evaluate" property="thirdEvaluate" />
+            <result column="writtentest_accuracy" property="writtentestAccuracy" />
+            <result column="first_status" property="firstStatus" />
+            <result column="second_status" property="secondStatus" />
+            <result column="third_status" property="thirdStatus" />
+            <result column="first_location" property="firstLocation" />
+            <result column="second_location" property="secondLocation" />
+            <result column="third_location" property="thirdLocation" />
+            <result column="writtentest_time" property="writtentestTime" />
+            <result column="writtentest_location" property="writtentestLocation" />
+            <result column="writtentester" property="writtentester" />
+            <result column="notes" property="notes" />
+        </collection>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, gender, age, nationId, tiptopDegree, posId, type, source, experience, expectSalary, mail, phone, status, isBlack, blackreason, sendTime, resume, portfolio, notes, submit
+        id, name, gender, age, nationId, tiptopDegree, posId, type, source, experience, expectSalary,
+          mail, phone, status, isBlack, blackreason, sendTime, notes, submit,birthday,nativePlace,
+          politicId, school, specialty, graduateYear, postTime, operator
     </sql>
     <select id="listJobseeker" resultType="com.txxw.hr.dao.pojo.Jobseeker">
         SELECT
@@ -44,7 +77,7 @@
             <if test="gender != ''">
                 and gender=#{gender}
             </if>
-            <if test="posId != ''">
+            <if test="posId != null">
                 and posId=#{posId}
             </if>
             <if test="tiptopDegree != ''">
@@ -75,9 +108,97 @@
             <if test="phone != null">
                 AND phone like concat('%',#{phone},'%')
             </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
 
         </where>
         order by sendTime asc
+    </select>
+
+    <select id="listAllJobseeker" resultMap="JobseekerWithInterview">
+        SELECT
+        j.*,
+        i.*
+--         i.first_time AS firstTime,
+--         i.second_time AS secondTime,
+--         i.third_time AS thirdTime,
+--         i.first_interviewer AS firstInterviewer,
+--         i.second_interviewer AS secondInterviewer,
+--         i.third_interviewer AS thirdInterviewer,
+--         i.first_evaluate AS firstEvaluate,
+--         i.second_evaluate AS secondEvaluate,
+--         i.third_evaluate AS thirdEvaluate,
+--         i.writtentest_accuracy AS writtentestAccuracy,
+--         i.first_status AS firstStatus,
+--         i.second_status AS secondStatus,
+--         i.third_status AS thirdStatus,
+--         i.first_location AS firstLocation,
+--         i.second_location AS secondLocation,
+--         i.third_location AS thirdLocation,
+--         i.writtentest_time AS writtentestTime,
+--         i.writtentest_location AS writtentestLocation,
+--         i.writtentester AS writtentester,
+--         i.notes AS notes,
+        FROM
+        tx_jobseeker j,
+        tx_interview i
+        <where>
+            1 = 1
+            AND j.id = i.jobseeker_id
+            <if test="name != ''">
+                and j.`name` like concat('%',#{name},'%')
+            </if>
+            <if test="gender != ''">
+                and j.gender=#{gender}
+            </if>
+            <if test="posId != null">
+                and j.posId=#{posId}
+            </if>
+            <if test="tiptopDegree != ''">
+                and j.tiptopDegree=#{tiptopDegree}
+            </if>
+            <if test="source != ''">
+                and j.`source`=#{source}
+            </if>
+            <if test="type != ''">
+                and j.`type`=#{type}
+            </if>
+            <if test="isBlack != null">
+                and j.isBlack=#{isBlack}
+            </if>
+            <if test="age != null and age.length > 0">
+                <if test="age[0] != null and age[1] != null">
+                    AND j.age between #{age[0]} and #{age[1]}
+                </if>
+            </if>
+            <if test="specificAge != null">
+                AND j.age = #{specificAge}
+            </if>
+            <if test="expectSalary != null and expectSalary.length > 0">
+                <if test="expectSalary[0] != null and expectSalary[1] != null">
+                    AND j.expectSalary between #{expectSalary[0]} and #{expectSalary[1]}
+                </if>
+            </if>
+            <if test="phone != null">
+                AND j.phone like concat('%',#{phone},'%')
+            </if>
+            <if test="status != null">
+                AND j.status = #{status}
+            </if>
+            <if test="interviewSelect != null">
+                <if test="interviewSelect == 1">
+                    AND i.first_status = 1
+                </if>
+                <if test="interviewSelect == 2">
+                    AND i.second_status = 1
+                </if>
+                <if test="interviewSelect == 3">
+                    AND i.third_status = 1
+                </if>
+            </if>
+        </where>
+        order by j.sendTime asc
     </select>
 
 </mapper>

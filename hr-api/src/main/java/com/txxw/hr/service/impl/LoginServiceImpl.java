@@ -1,5 +1,6 @@
 package com.txxw.hr.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.txxw.hr.dao.pojo.Admin;
 import com.txxw.hr.service.IAdminService;
 import com.txxw.hr.service.LoginService;
@@ -69,6 +70,10 @@ public class LoginServiceImpl implements LoginService {
         if (!userDetails.isEnabled()) {
             return Result.fail(ACCOUNT_ENABLE.getCode(), ACCOUNT_ENABLE.getMsg());
         }
+        //更新用户上次登录时间
+//        LambdaQueryWrapper<Admin> admin = new LambdaQueryWrapper<>();
+
+
         //更新security登录用户对象
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails
                 , null, userDetails.getAuthorities());
@@ -84,7 +89,6 @@ public class LoginServiceImpl implements LoginService {
 
     /**
      * 退出登录
-     *
      * @return
      */
     @Override

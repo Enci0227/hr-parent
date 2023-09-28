@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @description:项目启动类
  **/
 @SpringBootApplication
-//@EnableScheduling
+@EnableScheduling
 public class HrAPP {
     public static void main(String[] args) {
         SpringApplication.run(HrAPP.class, args);

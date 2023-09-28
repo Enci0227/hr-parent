@@ -68,9 +68,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				"/txsw/testpaper/**",//放行天巡十问问卷获取表单
 				"/txsw/answer/**",//放行天巡十问问卷提交表单
 				"/nation/**",//放行民族选择器
+				"/politics-status/**",//放行政治面貌选择器
 				"/system/basic/pos/list",//放行职位选择器
 				"/txsw/**",
-				"/jobseeker/**"//临时放行求职者操作全部内容
+				"/jobseeker/**",//临时放行求职者操作全部内容
+				"/interview/**",//临时放行求职者面试信息操作全部内容
+				"/filter-rule/**",//临时放行筛选规则
+				"/question/**",//临时放行问题修改删除操作
+				"/notice/**"//临时放行公告
 		);
 	}
 
@@ -125,7 +130,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			throw new UsernameNotFoundException("用户名或密码不正确");
 		};
 	}
-
 
 	@Bean
 	public PasswordEncoder passwordEncoder(){

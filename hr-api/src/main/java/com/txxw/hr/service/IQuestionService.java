@@ -16,10 +16,10 @@ import com.txxw.hr.vo.params.QuestionParam;
 public interface IQuestionService extends IService<Question> {
 
     /**
-     * 更新天巡十问问题
+     * 更新或添加天巡十问问题
      * 点击每条问题下方的保存按钮的功能
      * @param questionParam
      */
-    Result updateQuestionForm(QuestionParam questionParam);
+    Result updateQuestion(QuestionParam questionParam);
 
 }

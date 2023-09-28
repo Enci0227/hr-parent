@@ -64,7 +64,7 @@ public class CodeGeneratorConfig {
 
 		// 数据源配置
 		DataSourceConfig dsc = new DataSourceConfig();
-		dsc.setUrl("jdbc:mysql://localhost:3306/hr?useUnicode=true&characterEncoding=UTF-8&serverTimeZone=UTC");
+		dsc.setUrl("jdbc:mysql://10.0.10.40:3306/tx_hrms?useUnicode=true&characterEncoding=UTF-8&serverTimeZone=UTC");
 		dsc.setDriverName("com.mysql.cj.jdbc.Driver");
 		dsc.setUsername("root");
 		dsc.setPassword("123456");
@@ -100,7 +100,7 @@ public class CodeGeneratorConfig {
 			@Override
 			public String outputFile(TableInfo tableInfo) {
 				// 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-				return projectPath + "/hr-api/src/main/resources/com/txxw/hr/dao/mapper" + tableInfo.getEntityName() + "Mapper"
+				return projectPath + "/hr-api/src/main/resources/com/txxw/hr/dao/mapper/" + tableInfo.getEntityName() + "Mapper"
 						+ StringPool.DOT_XML;
 			}
 		});

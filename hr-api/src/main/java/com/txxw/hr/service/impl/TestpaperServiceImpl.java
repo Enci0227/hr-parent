@@ -43,6 +43,8 @@ public class TestpaperServiceImpl extends ServiceImpl<TestpaperMapper, Testpaper
     private NationMapper nationMapper;
     @Autowired
     private PositionMapper positionMapper;
+    @Autowired
+    private PoliticsStatusMapper politicsStatusMapper;
 
 
     @Override
@@ -64,9 +66,6 @@ public class TestpaperServiceImpl extends ServiceImpl<TestpaperMapper, Testpaper
         infokeyWrapper.in(Infokey::getId, infokeyIdList);
         List<Infokey> infokeyList = infokeyMapper.selectList(infokeyWrapper);
 
-//        List<Infokey> infokeyListVo = new ArrayList<>();
-
-
         for (Infokey infokey : infokeyList) {
 
             //处理民族选择器
@@ -82,7 +81,7 @@ public class TestpaperServiceImpl extends ServiceImpl<TestpaperMapper, Testpaper
                 String nationSelect = String.join("/", nationStrings);
                 infokey.setIsSelect(nationSelect);
                 continue;
-            }else if (infokey.getKeyname().equals("posId") ){
+            }else if (infokey.getKeyname().equals("posId") ){//处理职位选择器
                 LambdaQueryWrapper<Position> posWrapper = new LambdaQueryWrapper<>();
                 posWrapper.select(Position::getName);
                 List<Position> positions= positionMapper.selectList(posWrapper);
@@ -92,12 +91,21 @@ public class TestpaperServiceImpl extends ServiceImpl<TestpaperMapper, Testpaper
                 }
                 String posSelect = String.join("/", posStrings);
                 infokey.setIsSelect(posSelect);
-                System.out.println(infokey);
+                continue;
+            } else if (infokey.getKeyname().equals("politicId")){//处理政治面貌选择器
+                LambdaQueryWrapper<PoliticsStatus> politicsWrapper = new LambdaQueryWrapper<>();
+                politicsWrapper.select(PoliticsStatus::getName);
+                List<PoliticsStatus> politicsStatuses = politicsStatusMapper.selectList(politicsWrapper);
+                List<String> politicsStatuseStrings = new ArrayList<>();
+                for (PoliticsStatus p : politicsStatuses){
+                    politicsStatuseStrings.add(p.getName());
+                }
+                String politicsStatusesSelect = String.join("/", politicsStatuseStrings);
+                infokey.setIsSelect(politicsStatusesSelect);
                 continue;
             }else{
                 continue;
             }
-
         }
 
         //获取问题列表

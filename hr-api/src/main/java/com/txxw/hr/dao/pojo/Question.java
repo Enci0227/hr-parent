@@ -21,7 +21,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @TableName("tx_question")
 @ApiModel(value="Question对象", description="")
-public class Question {
+public class Question implements Serializable{
 
     @ApiModelProperty(value = "天巡十问问题Id")
     @TableId(value = "id", type = IdType.AUTO)

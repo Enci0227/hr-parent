@@ -28,7 +28,6 @@ public interface IAnswerService extends IService<Answer> {
      */
     Result submitTxswAnswer(TxswAnswerParam txswAnswerParam);
 
-
     /**
      * 根据求职者id查询十问作答
      * @param jobSeekerId

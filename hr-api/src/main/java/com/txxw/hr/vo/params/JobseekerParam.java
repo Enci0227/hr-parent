@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * <p>
@@ -21,6 +22,9 @@ import java.io.Serializable;
 @ApiModel(value="JobseekerParam对象", description="求职者有关基本信息的作答")
 public class JobseekerParam{
 
+    @ApiModelProperty(value = "id")
+    private Long id;
+
     @ApiModelProperty(value = "姓名",required = true)
     private String name;
 
@@ -30,13 +34,19 @@ public class JobseekerParam{
     @ApiModelProperty(value = "年龄")
     private Integer age;
 
-    @ApiModelProperty(value = "民族名称",required = true)
+    @ApiModelProperty(value = "民族Id")
+    private Long nationId;
+
+    @ApiModelProperty(value = "民族名称",required = true,notes = "当传id时此字段可以无参")
     private String nation;
 
     @ApiModelProperty(value = "最高学历",required = true)
     private String tiptopDegree;
 
-    @ApiModelProperty(value = "职位名称",required = true)
+    @ApiModelProperty(value = "职位Id")
+    private Long posId;
+
+    @ApiModelProperty(value = "职位名称",required = true,notes = "当传id时此字段可以无参")
     private String position;
 
     @ApiModelProperty(value = "应聘类型",required = true)
@@ -59,5 +69,33 @@ public class JobseekerParam{
 
     @ApiModelProperty(value = "备注")
     private String notes;
+
+    //新增字段待添加
+    @ApiModelProperty(value = "出生日期")
+    private LocalDate birthday;
+
+    @ApiModelProperty(value = "籍贯")
+    private String nativePlace;
+
+    @ApiModelProperty(value = "政治面貌Id")
+    private Long politicId;
+
+    @ApiModelProperty(value = "政治面貌",required = true, notes = "当传id时此字段可以无参")
+    private String politic;
+
+    @ApiModelProperty(value = "最高学历院校")
+    private String school;
+
+    @ApiModelProperty(value = "所属专业/方向")
+    private String specialty;
+
+    @ApiModelProperty(value = "毕业年份")
+    private String graduateYear;
+
+    @ApiModelProperty(value = "可到岗时间")
+    private LocalDate postTime;
+
+    @ApiModelProperty(value = "提交状态")
+    private Boolean submit;
 
 }

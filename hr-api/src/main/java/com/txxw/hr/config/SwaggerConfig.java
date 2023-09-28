@@ -49,7 +49,7 @@ public class SwaggerConfig {
     private ApiInfo webApiInfo(){
         return new ApiInfoBuilder()
                 .title("人力资源管理系统API文档")
-                .description("本文档描述了服务接口定义")
+                .description("本文档描述了服务接口定义,前端在开发时应做好相应的输入规则性验证，即输入的数据格式不对就不应调用接口，并在可视化界面给出友好的提示信息。另外部分接口中给出了相应描述信息及实现思路。")
                 .version("1.0.0-SNAPSHOT")
                 .contact(new Contact("Enci","http://localhost：8081/doc.html","123456@qq.com"))
                 .build();
